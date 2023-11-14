@@ -22,18 +22,26 @@ function adios(nombre, otroCallback) {
 function conversacion(nombre, veces, callback) {
     if(veces >= 0){
         hablar(function () {
-            conversacion();
+            conversacion(nombre, --veces, callback);
         })
+    }else{
+        adios(nombre, callback)
     }
 }
 
 console.log('Iniciando proceso...');
 
-hola('gaston', function (nombre) {
-    adios(nombre, function () {
-        console.log('Terminamos')
-    });
+hola('Gaston', function(nombre){
+    conversacion(nombre, 3, function(){
+        console.log('Proceso Terminado')
+    })
 })
+
+// hola('gaston', function (nombre) {
+//     adios(nombre, function () {
+//         console.log('Terminamos...')
+//     });
+// })
 
 // hola('gaston', function (nombre) {
 
